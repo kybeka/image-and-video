@@ -1,0 +1,18 @@
+% Task2.m
+
+% call both scripts
+run('gray_world_assumption.m');
+run('pixel_based_correction.m');
+
+% gamma correction func
+gamma_correct = @(img) img .^ (1 / 2.2);
+
+I_orig = imread('white_balance_input.jpg');
+I_gamma_corrected = gamma_correct(im2double(I_orig));
+
+I_pix_corr = imread('I_pix_corr.jpg');
+I_gray_world = imread('I_gray_world.jpg');
+
+% used montage (finally)
+figure;
+montage({I_gamma_corrected, I_pix_corr, I_gray_world}, 'Size', [1, 3]);
